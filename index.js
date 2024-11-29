@@ -55,6 +55,27 @@ app.get('/api/product/:id', async function(req,res)
 })
 
 
+// update product
+
+app.put('/api/product/:id', async function(req,res)
+{
+    try
+    {
+        const {id} =req.params;
+        const product = await Product.findByIdAndUpdate(id, req.body)
+        if(!product)
+            return res.status(404).json({message: 'Product not found'})
+
+        const updatedProduct = await Product.findById(id);
+        res.status(200).json(updatedProduct)
+
+    }
+    catch (error)
+    {
+        res.status(500).json({message: error.message})
+    }
+})
+
 mongoose.connect('mongodb+srv://admin:admin@cluster0.lstf4.mongodb.net/node-api?retryWrites=true&w=majority&appName=Cluster0')
 .then(()=>
 {
