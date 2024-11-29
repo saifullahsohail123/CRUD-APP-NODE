@@ -39,7 +39,7 @@ app.get('/api/products',async function(req,res) {
 
 
 
-app.get('/api/products/:id', async function(req,res)
+app.get('/api/product/:id', async function(req,res)
 {
     try
     {
